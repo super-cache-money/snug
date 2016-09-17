@@ -19,6 +19,10 @@ post '/login' do
   validateUser(params[:username], params[:password]).to_s
 end
 
+post '/register' do
+
+end
+
 def validateUser(username, password)
   #if password matches return user
   if getUser(username)["password"] == password
@@ -27,3 +31,5 @@ def validateUser(username, password)
     "user not found in our records"
   end
 end
+
+

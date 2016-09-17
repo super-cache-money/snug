@@ -1,5 +1,3 @@
-db = Hash.new("db")
-
 # def get(key)
 #
 # end
@@ -15,23 +13,35 @@ def save(hash)
   end
 end
 
-def getUser(username)
+def get(entity,username)
   db = load()
-  db[username]
+  db['users'][username]
 end
 
 def saveUser(username, details)
   db = load()
-  db[username] = details
+  db['users'][username] = details
   save(db)
 end
 
 def deleteUser(username)
   db = load()
-  db.delete(username)
+  db['users'].delete(username)
   save(db)
 end
 
 def getAllUsers()
-  load()
+  load()['users']
 end
+
+def migrate
+  old_db = load()
+  new_db = {
+      "users" => old_db,
+      "items" => {}
+  }
+  save(new_db)
+end
+
+#db['users']['username']
+#db['']
